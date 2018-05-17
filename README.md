@@ -1,6 +1,9 @@
 ## Combinatorial_lib for java
 The aim of this library is to provide an interface
  similar to `itertools` in python.
+### How to use ?
+1. Include [jar file](https://github.com/samagra14/itertools_java/releases/download/0.01/combinatorial_lib.jar) from [releases](https://github.com/samagra14/itertools_java/releases).
+2. Use them as shown below.
 
 ### Example Usages
 #### Combinations
