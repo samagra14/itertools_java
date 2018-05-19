@@ -10,7 +10,7 @@ The aim of this library is to provide an interface
     .... The same effect can be achieved using this library
     by combining `Itertools.imap()` and `count()` to form `Itertools.imap(f, Itertools.count())`.
                                   
-** This library uses generator like constructs to provide iterators and hence
+**This library uses generator like constructs to provide iterators and hence
 has no memory and speed limitations as a particular element is generated only when it is needed.**
 
 The following methods have been implemented in the library and are ready for use.
