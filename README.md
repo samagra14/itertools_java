@@ -24,7 +24,7 @@ The following methods have been implemented in the library and are ready for use
 
 ### Iterators terminating on the shortest input sequence:
 | Iterator        | Arguments  | Results  | Example |
-| ------------- |:-------------:| -----:|  -----:|
+| :-------------: |:-------------:| :-----:|  :-----:|
 | `chain()`     | p, q, …        |p0, p1, … plast, q0, q1, …| chain('ABC', 'DEF') --> A B C D E F|
 | `compress()`  |data, selectors | (d[0] if s[0]), (d[1] if s[1]), …| compress('ABCDEF', [1,0,1,0,1,1]) --> A C E F|
 | `dropwhile()` | pred, seq      |seq[n], seq[n+1], starting when pred fails | dropwhile( x-> x<5, [1,4,6,4,1]) --> 6 4 1|
