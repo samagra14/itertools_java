@@ -1,4 +1,4 @@
-## Itertools for java
+# Itertools for java
 The aim of this library is to provide an interface
  similar to `itertools` in python.This module implements
  a number of iterator building blocks inspired by
@@ -15,14 +15,14 @@ has no memory and speed limitations as a particular element is generated only wh
 
 The following methods have been implemented in the library and are ready for use.
 
-#### Infinite Iterators
+### Infinite Iterators
 | Iterator        | Arguments  | Results  | Example |
 | ------------- |:-------------:| -----:|  -----:|
 | `count()`     | start,[step] | start, start+step , start+2*step,... | count(10) --> 10 11 12 13 14 ...|
 | `cycle()`      | p      |   p0, p1, … plast, p0, p1, … |cycle('ABCD') --> A B C D A B C D ...|
 | `repeat()` | elem [,n]      |    elem, elem, elem, … endlessly or up to n times | repeat(10, 3) --> 10 10 10|
 
-#### Iterators terminating on the shortest input sequence:
+### Iterators terminating on the shortest input sequence:
 | Iterator        | Arguments  | Results  | Example |
 | :-------------: |:-------------| :-----|  :-----|
 | `chain()`     | p, q, …        |p0, p1, … plast, q0, q1, …| chain('ABC', 'DEF') --> A B C D E F|
@@ -36,7 +36,7 @@ The following methods have been implemented in the library and are ready for use
 | `izip()`      | p, q, …       | (p[0], q[0]), (p[1], q[1]), …| izip('ABCD', 'xy') --> Ax By|
 | `izipLongest()` | p, q, …     | (p[0], q[0]), (p[1], q[1]), …| izip_longest('ABCD', 'xy', fillvalue='-') --> Ax By C- D- |
 
-#### Combinatoric generators
+### Combinatoric generators
 | Iterator        | Arguments  | Results  |
 | :-------------: |:-------------| :-----|
 | `product()`   | p, q, r …   | cartesian product, equivalent to a nested for-loop |
@@ -46,12 +46,12 @@ The following methods have been implemented in the library and are ready for use
 | permutations('ABCD', 2)|  | AB AC AD BA BC BD CA CB CD DA DB DC|
 | combinations('ABCD', 2) | | AB AC AD BC BD CD|
 
-### How to use ?
+## How to use ?
 1. Include [jar file](https://github.com/samagra14/itertools_java/releases/download/0.01/combinatorial_lib.jar) from [releases](https://github.com/samagra14/itertools_java/releases).
 2. Use them as shown below.
 
-### Documentation and Examples
-##### 1. `Itertools.chain(List<T>... iterables)`
+## Documentation and Examples
+#### 1. `Itertools.chain(List<T>... iterables)`
 Make an iterator that returns elements from the first iterable until it is exhausted, then proceeds to the next iterable, until all of the iterables are exhausted. Used for treating consecutive sequences as a single sequence.
 ````java
 public void chainExample() {
@@ -66,7 +66,7 @@ public void chainExample() {
             i++;
         }
 ````
-##### 2. `Itertools.compress(List<T> data, List<Boolean> selectors)`
+#### 2. `Itertools.compress(List<T> data, List<Boolean> selectors)`
 Make an iterator that filters elements from data returning only those that have a corresponding element in selectors that evaluates to True. Stops when either the data or selectors iterables has been exhausted. 
 ````java
 public void compressExample() {
@@ -85,7 +85,7 @@ public void compressExample() {
         }
     }
 ````
-##### 3. `Itertools.dropWhile(Predicate<T> pred,List<T> seq)`
+#### 3. `Itertools.dropWhile(Predicate<T> pred,List<T> seq)`
 Make an iterator that drops elements from the iterable as long as the predicate is true; afterwards, returns every element. Note, the iterator does not produce any output until the predicate first becomes false, so it may have a lengthy start-up time.
 ````java
 public void dropwhileExample() {
@@ -102,7 +102,7 @@ public void dropwhileExample() {
         }
     }
 ````
-##### 4. `Itertools.ifilter(Predicate<T> predicate, List<T> list)`
+#### 4. `Itertools.ifilter(Predicate<T> predicate, List<T> list)`
 Make an iterator that filters elements from iterable returning only those for which the predicate is True.
 ````java
 public void ifilterTest() {
@@ -129,7 +129,7 @@ public void ifilterTest() {
     }
 ````
 
-##### 5. `Itertools.ifilterfalse(Predicate<T> predicate, List<T> list)`
+#### 5. `Itertools.ifilterfalse(Predicate<T> predicate, List<T> list)`
 
 Make an iterator that filters elements from iterable returning only those for which the predicate is False.
 
@@ -157,7 +157,7 @@ Make an iterator that filters elements from iterable returning only those for wh
         }
     }
 ````
-##### 6. `Itertools.islice(List<T> seq, int start, int stop,int step)`
+#### 6. `Itertools.islice(List<T> seq, int start, int stop,int step)`
 
 Make an iterator that returns selected elements from the iterable. If start is non-zero, then elements from the iterable are skipped until start is reached. Afterward, elements are returned consecutively unless step is set higher than one which results in items being skipped. If stop is None, then iteration continues until the iterator is exhausted, if at all; otherwise, it stops at the specified position. 
 ````java
@@ -176,7 +176,7 @@ Make an iterator that returns selected elements from the iterable. If start is n
         }
     }
 ````
-##### 7. `Itertools.imap(Function<T,U> function,List<T>... lists)`
+#### 7. `Itertools.imap(Function<T,U> function,List<T>... lists)`
 Make an iterator that computes the function using arguments from each of the iterables.
 ````java
 public void imapExample() {
@@ -194,7 +194,7 @@ public void imapExample() {
         }
     }
 ````
-##### 8. `Itertools.takeWhile(Predicate<T> pred,List<T> seq)`
+#### 8. `Itertools.takeWhile(Predicate<T> pred,List<T> seq)`
 Make an iterator that returns elements from the iterable as long as the predicate is true. 
 ````java
 public void takewhileTest() {
@@ -209,7 +209,7 @@ public void takewhileTest() {
         }
     }
 ````
-##### 8. `Itertools.izip(List<T> ... lists)`
+#### 8. `Itertools.izip(List<T> ... lists)`
 Make an iterator that aggregates elements from each of the iterables.
 ````java
 public void izipTest(){
@@ -225,7 +225,7 @@ public void izipTest(){
         }
     }
 ````
-##### 9. `Itertools.izipLongest(T fillValue,List<T> ... lists)`
+#### 9. `Itertools.izipLongest(T fillValue,List<T> ... lists)`
 Make an iterator that aggregates elements from each of the iterables. If the iterables are of uneven length, missing values are filled-in with fillvalue. Iteration continues until the longest iterable is exhausted.
 ````java
 public void izipLongestExample(){
@@ -247,7 +247,7 @@ public void izipLongestExample(){
         }
 
 ````
-##### 10. `Itertools.product(List<T> ... lists)`
+#### 10. `Itertools.product(List<T> ... lists)`
 Cartesian product of input iterables.
 
 Roughly equivalent to nested for-loops in a generator expression. The nested loops cycle like an odometer with the rightmost element advancing on every iteration. This pattern creates a lexicographic ordering so that if the input’s iterables are sorted, the product tuples are emitted in sorted order.
@@ -267,7 +267,7 @@ Roughly equivalent to nested for-loops in a generator expression. The nested loo
         }
     }
 ````
-##### 11. `Itertools.combinations(List<T> list, int r)`
+#### 11. `Itertools.combinations(List<T> list, int r)`
 Return r length subsequences of elements from the input iterable.
 
 Combinations are emitted in lexicographic sort order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order.
@@ -290,7 +290,7 @@ public void exampleCombinations(){
     }
 ````
 
-##### 12. `Itertools.permutations(List<T> list,int r)`
+#### 12. `Itertools.permutations(List<T> list,int r)`
 Return successive r length permutations of elements in the iterable.
 Permutations are emitted in lexicographic sort order. So, if the input iterable is sorted, the permutation tuples will be produced in sorted order.
 
@@ -314,6 +314,6 @@ public void testPermutations(){
 ````
 
 
-### References
+## References
 1. Wikipedia page for [Generators](https://en.wikipedia.org/wiki/Generator_(computer_programming))
 2. This project is heavily inspired from [Python itertools](https://docs.python.org/2/library/itertools.html)
