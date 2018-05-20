@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ItertoolsTest {
 
     @Test
-    public void isliceTest(){
+    public void isliceTest() {
         int i = 0;
         for (int a :
                 Itertools.islice(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), 5, 2)) {
@@ -30,7 +29,7 @@ public class ItertoolsTest {
     public void imapTest() {
         int i = 0;
         for (double a :
-                       Itertools.imap((t) -> Math.pow(t.get(0), t.get(1)), Arrays.asList(2, 3, 10), Arrays.asList(5, 2, 3))) {
+                Itertools.imap((t) -> Math.pow(t.get(0), t.get(1)), Arrays.asList(2, 3, 10), Arrays.asList(5, 2, 3))) {
             if (i == 0)
                 assertEquals(32, (int) a);
             if (i == 1)
@@ -186,9 +185,6 @@ public class ItertoolsTest {
             if (i == 3) {
                 assertEquals(8, a);
             }
-            if (i == 4) {
-                assertEquals(9, a);
-            }
             i++;
         }
     }
@@ -207,62 +203,62 @@ public class ItertoolsTest {
     }
 
     @Test
-    public void izipTest(){
-        String[] listOne = {"A","B","C","D"};
-        String[] listTwo = {"x","y"};
+    public void izipTest() {
+        String[] listOne = {"A", "B", "C", "D"};
+        String[] listTwo = {"x", "y"};
         int i = 0;
         for (List<String> list :
-                Itertools.izip(Arrays.asList(listOne),Arrays.asList(listTwo))) {
-            assertTrue(i<2);
-            assertEquals(listOne[i],list.get(0));
-            assertEquals(listTwo[i],list.get(1));
+                Itertools.izip(Arrays.asList(listOne), Arrays.asList(listTwo))) {
+            assertTrue(i < 2);
+            assertEquals(listOne[i], list.get(0));
+            assertEquals(listTwo[i], list.get(1));
             i++;
         }
     }
 
     @Test
-    public void izipLongestTest(){
-        String[] listOne = {"A","B","C","D"};
-        String[] listTwo = {"x","y"};
+    public void izipLongestTest() {
+        String[] listOne = {"A", "B", "C", "D"};
+        String[] listTwo = {"x", "y"};
         int i = 0;
         for (List<String> list :
-                Itertools.izipLongest("filler",Arrays.asList(listOne),Arrays.asList(listTwo))){
-            assertTrue(i<4);
-            if (i<2){
-                assertEquals(listOne[i],list.get(0));
-                assertEquals(listTwo[i],list.get(1));
-            }
-            else {
-                assertEquals(listOne[i],list.get(0));
-                assertEquals("filler",list.get(1));
+                Itertools.izipLongest("filler", Arrays.asList(listOne), Arrays.asList(listTwo))) {
+            assertTrue(i < 4);
+            if (i < 2) {
+                assertEquals(listOne[i], list.get(0));
+                assertEquals(listTwo[i], list.get(1));
+            } else {
+                assertEquals(listOne[i], list.get(0));
+                assertEquals("filler", list.get(1));
             }
             i++;
         }
     }
+
     @Test
-    public void testProduct(){
-        String[] str1 = {"alpha","Beta","gamma"};
-        String[] str2 = {"a","b"};
-        String[] str3 = {"Samagra","Sammy","Shanu"};
+    public void testProduct() {
+        String[] str1 = {"alpha", "Beta", "gamma"};
+        String[] str2 = {"a", "b"};
+        String[] str3 = {"Samagra", "Sammy", "Shanu"};
         for (List<String> products :
-                Itertools.product(Arrays.asList(str1),Arrays.asList(str2),Arrays.asList(str3))) {
+                Itertools.product(Arrays.asList(str1), Arrays.asList(str2), Arrays.asList(str3))) {
             for (String s :
                     products) {
-                System.out.print(s+" ");
+                System.out.print(s + " ");
             }
             System.out.println();
         }
     }
 
     @Test
-    public void testCombinations(){
-        String[] str1 = {"alpha","Beta","gamma","a","b","Samagra","Sammy","Shanu"};
+    public void testCombinations() {
+        String[] str1 = {"alpha", "Beta", "gamma", "a", "b", "Samagra", "Sammy", "Shanu"};
         int i = 0;
         for (List<String> products :
-                Itertools.combinations(Arrays.asList(str1),4)) {
+                Itertools.combinations(Arrays.asList(str1), 4)) {
             for (String s :
                     products) {
-                System.out.print(s+" ");
+                System.out.print(s + " ");
             }
             i++;
             System.out.println(i);
@@ -270,14 +266,14 @@ public class ItertoolsTest {
     }
 
     @Test
-    public void testPermutations(){
-        String[] str1 = {"alpha","Beta","gamma","a","b","Samagra"};
+    public void testPermutations() {
+        String[] str1 = {"alpha", "Beta", "gamma", "a", "b", "Samagra"};
         int i = 0;
         for (List<String> products :
-                Itertools.permutations(Arrays.asList(str1),5)) {
+                Itertools.permutations(Arrays.asList(str1), 5)) {
             for (String s :
                     products) {
-                System.out.print(s+" ");
+                System.out.print(s + " ");
             }
             i++;
             System.out.println(i);
