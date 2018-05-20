@@ -9,6 +9,7 @@ The aim of this library is to provide an interface
    tabulate(f) which produces a sequence f(0), f(1),
     .... The same effect can be achieved using this library
     by combining `Itertools.imap()` and `count()` to form `Itertools.imap(f, Itertools.count())`.
+ 
  #Table of Contents
  - [Itertools for java](#itertools-for-java)
  - [Features](#features)
