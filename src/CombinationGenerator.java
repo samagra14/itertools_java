@@ -55,7 +55,7 @@ public class CombinationGenerator {
         return result;
     }
 
-    static double nCr(int n, int r){
+    public static double nCr(int n, int r){
         int rfact=1, nfact=1, nrfact=1,temp1 = n-r ,temp2 = r;
         if(r>n-r)
         {
@@ -76,5 +76,19 @@ public class CombinationGenerator {
             nfact *= i;
         }
         return nfact/(double)(rfact*nrfact);
+    }
+
+    public static int[] generateNextCombination(int[] temp, int n, int r){
+        int m = r;
+        int maxVal = n;
+        while(temp[m-1]==maxVal) {
+            m = m - 1;
+            maxVal--;
+        }
+        temp[m-1]++;
+        for (int j = m; j < r; j++) {
+            temp[j] = temp[j-1]+1;
+        }
+        return temp;
     }
 }

@@ -79,4 +79,18 @@ public class PermutationGenerator {
         }
         return nfact;
     }
+
+    public static int[] generateNextProduct(int [] curr, int[] max){
+        int n = curr.length-1;
+        curr[n]++;
+        for (int i = n; i>0  ; i--) {
+            if (curr[i]>max[i]){
+                curr[i] = 1;
+                curr[i-1]++;
+            }
+        }
+        return curr;
+    }
+
+
 }

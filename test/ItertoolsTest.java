@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -238,4 +239,34 @@ public class ItertoolsTest {
             i++;
         }
     }
+    @Test
+    public void testProduct(){
+        String[] str1 = {"alpha","Beta","gamma"};
+        String[] str2 = {"a","b"};
+        String[] str3 = {"Samagra","Sammy","Shanu"};
+        for (List<String> products :
+                Itertools.product(Arrays.asList(str1),Arrays.asList(str2),Arrays.asList(str3))) {
+            for (String s :
+                    products) {
+                System.out.print(s+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void testCombinations(){
+        String[] str1 = {"alpha","Beta","gamma","a","b","Samagra","Sammy","Shanu"};
+        int i = 0;
+        for (List<String> products :
+                Itertools.combinations(Arrays.asList(str1),4)) {
+            for (String s :
+                    products) {
+                System.out.print(s+" ");
+            }
+            i++;
+            System.out.println(i);
+        }
+    }
+
 }
