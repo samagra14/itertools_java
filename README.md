@@ -10,7 +10,7 @@ The aim of this library is to provide an interface
     .... The same effect can be achieved using this library
     by combining `Itertools.imap()` and `count()` to form `Itertools.imap(f, Itertools.count())`.
  
- #Table of Contents
+ # Table of Contents
  - [Itertools for java](#itertools-for-java)
  - [Features](#features)
  - [Documentation](#documentation)
@@ -33,8 +33,7 @@ The aim of this library is to provide an interface
      + [11. `combinations(List<T> list, int r)`](#11--itertoolscombinations-list-t--list--int-r--)
      + [12. `permutations(List<T> list,int r)`](#12--itertoolspermutations-list-t--list-int-r--)
  - [References](#references)
- 
- <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
  
  # Features                                
