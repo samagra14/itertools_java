@@ -46,6 +46,10 @@ The following methods have been implemented in the library and are ready for use
 | permutations('ABCD', 2)|  | AB AC AD BA BC BD CA CB CD DA DB DC|
 | combinations('ABCD', 2) | | AB AC AD BC BD CD|
 
+### How to use ?
+1. Include [jar file](https://github.com/samagra14/itertools_java/releases/download/0.01/combinatorial_lib.jar) from [releases](https://github.com/samagra14/itertools_java/releases).
+2. Use them as shown below.
+
 ### Documentation and Examples
 ##### 1. `Itertools.chain(List<T>... iterables)`
 Make an iterator that returns elements from the first iterable until it is exhausted, then proceeds to the next iterable, until all of the iterables are exhausted. Used for treating consecutive sequences as a single sequence.
@@ -309,6 +313,7 @@ public void testPermutations(){
 
 ````
 
-### How to use ?
-1. Include [jar file](https://github.com/samagra14/itertools_java/releases/download/0.01/combinatorial_lib.jar) from [releases](https://github.com/samagra14/itertools_java/releases).
-2. Use them as shown below.
+
+### References
+1. Wikipedia page for [Generators](https://en.wikipedia.org/wiki/Generator_(computer_programming))
+2. This project is heavily inspired from [Python itertools](https://docs.python.org/2/library/itertools.html)
