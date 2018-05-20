@@ -178,4 +178,91 @@ public class Itertools {
             }
         };
     }
+
+    /**
+     *
+     * @param predicate
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> Iterable<T> ifilter(Predicate<T> predicate, List<T> list){
+        return () -> new Iterator<T>() {
+            int index = -1;
+            @Override
+            public boolean hasNext() {
+                index++;
+                while (index<list.size()&& !predicate.pred(list.get(index)))
+                    index++;
+                return index<list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(index);
+            }
+        };
+    }
+
+
+    public static <T> Iterable<T> ifilterfalse(Predicate<T> predicate, List<T> list){
+        return () -> new Iterator<T>() {
+            int index = -1;
+            @Override
+            public boolean hasNext() {
+                index++;
+                while (index<list.size()&& predicate.pred(list.get(index)))
+                    index++;
+                return index<list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(index);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> islice(List<T> seq, int start, int stop,int step){
+        return () -> new Iterator<T>() {
+            int index = start -step;
+            @Override
+            public boolean hasNext() {
+                index+=step;
+                return index <seq.size()&&index<stop&& index >=start;
+            }
+
+            @Override
+            public T next() {
+                return seq.get(index);
+            }
+        };
+    }
+    public static <T> Iterable<T> islice(List<T> seq, int stop,int step){
+        return islice(seq,0,stop,step);
+    }
+    public static <T> Iterable<T> islice(List<T> seq, int stop){
+        return islice(seq,0,stop,1);
+    }
+
+
+    public static <T,U> Iterable<U> imap(Function<T,U> function,List<T>... lists){
+        return () -> new Iterator<U>() {
+            int index = -1;
+            @Override
+            public boolean hasNext() {
+                index++;
+                return index<lists[0].size();
+            }
+
+            @Override
+            public U next() {
+                T[] arr = (T[])new Object[lists.length];
+                for (int i = 0; i < lists.length; i++) {
+                    arr[i] = lists[i].get(index);
+                }
+                return function.apply(arr);
+            }
+        };
+    }
 }
