@@ -19,19 +19,19 @@ The aim of this library is to provide an interface
    * [Combinatoric generators](#combinatoric-generators)
  - [How to use ?](#how-to-use--)
    * [Itertool functions and their usage examples](#itertool-functions-and-their-usage-examples)
-     + [1. `chain(List<T>... iterables)`](#1--itertoolschain-list-t--iterables--)
-     + [2. `compress(List<T> data, List<Boolean> selectors)`](#2--itertoolscompress-list-t--data--list-boolean--selectors--)
-     + [3. `dropWhile(Predicate<T> pred,List<T> seq)`](#3--itertoolsdropwhile-predicate-t--pred-list-t--seq--)
-     + [4. `ifilter(Predicate<T> predicate, List<T> list)`](#4--itertoolsifilter-predicate-t--predicate--list-t--list--)
-     + [5. `ifilterfalse(Predicate<T> predicate, List<T> list)`](#5--itertoolsifilterfalse-predicate-t--predicate--list-t--list--)
-     + [6. `islice(List<T> seq, int start, int stop,int step)`](#6--itertoolsislice-list-t--seq--int-start--int-stop-int-step--)
-     + [7. `imap(Function<T,U> function,List<T>... lists)`](#7--itertoolsimap-function-t-u--function-list-t--lists--)
-     + [8. `takeWhile(Predicate<T> pred,List<T> seq)`](#8--itertoolstakewhile-predicate-t--pred-list-t--seq--)
-     + [8. `izip(List<T> ... lists)`](#8--itertoolsizip-list-t---lists--)
-     + [9. `izipLongest(T fillValue,List<T> ... lists)`](#9--itertoolsiziplongest-t-fillvalue-list-t---lists--)
-     + [10. `product(List<T> ... lists)`](#10--itertoolsproduct-list-t---lists--)
-     + [11. `combinations(List<T> list, int r)`](#11--itertoolscombinations-list-t--list--int-r--)
-     + [12. `permutations(List<T> list,int r)`](#12--itertoolspermutations-list-t--list-int-r--)
+     + [ chain(List<T>... iterables)](#1--itertoolschain-list-t--iterables--)
+     + [ compress(List<T> data, List<Boolean> selectors)](#2--itertoolscompress-list-t--data--list-boolean--selectors--)
+     + [ dropWhile(Predicate<T> pred,List<T> seq)](#3--itertoolsdropwhile-predicate-t--pred-list-t--seq--)
+     + [ ifilter(Predicate<T> predicate, List<T> list)](#4--itertoolsifilter-predicate-t--predicate--list-t--list--)
+     + [ ifilterfalse(Predicate<T> predicate, List<T> list)](#5--itertoolsifilterfalse-predicate-t--predicate--list-t--list--)
+     + [ islice(List<T> seq, int start, int stop,int step)](#6--itertoolsislice-list-t--seq--int-start--int-stop-int-step--)
+     + [ imap(Function<T,U> function,List<T>... lists)](#7--itertoolsimap-function-t-u--function-list-t--lists--)
+     + [ takeWhile(Predicate<T> pred,List<T> seq)](#8--itertoolstakewhile-predicate-t--pred-list-t--seq--)
+     + [ izip(List<T> ... lists)](#8--itertoolsizip-list-t---lists--)
+     + [ izipLongest(T fillValue,List<T> ... lists)](#9--itertoolsiziplongest-t-fillvalue-list-t---lists--)
+     + [ product(List<T> ... lists)](#10--itertoolsproduct-list-t---lists--)
+     + [ combinations(List<T> list, int r)](#11--itertoolscombinations-list-t--list--int-r--)
+     + [ permutations(List<T> list,int r)](#12--itertoolspermutations-list-t--list-int-r--)
  - [References](#references)
 
 
@@ -236,7 +236,7 @@ public void takewhileTest() {
         }
     }
 ````
-### 8. `Itertools.izip(List<T> ... lists)`
+### 9. `Itertools.izip(List<T> ... lists)`
 Make an iterator that aggregates elements from each of the iterables.
 ````java
 public void izipTest(){
@@ -252,7 +252,7 @@ public void izipTest(){
         }
     }
 ````
-### 9. `Itertools.izipLongest(T fillValue,List<T> ... lists)`
+### 10. `Itertools.izipLongest(T fillValue,List<T> ... lists)`
 Make an iterator that aggregates elements from each of the iterables. If the iterables are of uneven length, missing values are filled-in with fillvalue. Iteration continues until the longest iterable is exhausted.
 ````java
 public void izipLongestExample(){
@@ -274,7 +274,7 @@ public void izipLongestExample(){
         }
 
 ````
-### 10. `Itertools.product(List<T> ... lists)`
+### 11. `Itertools.product(List<T> ... lists)`
 Cartesian product of input iterables.
 
 Roughly equivalent to nested for-loops in a generator expression. The nested loops cycle like an odometer with the rightmost element advancing on every iteration. This pattern creates a lexicographic ordering so that if the input’s iterables are sorted, the product tuples are emitted in sorted order.
@@ -294,7 +294,7 @@ Roughly equivalent to nested for-loops in a generator expression. The nested loo
         }
     }
 ````
-### 11. `Itertools.combinations(List<T> list, int r)`
+### 12. `Itertools.combinations(List<T> list, int r)`
 Return r length subsequences of elements from the input iterable.
 
 Combinations are emitted in lexicographic sort order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order.
@@ -317,7 +317,7 @@ public void exampleCombinations(){
     }
 ````
 
-### 12. `Itertools.permutations(List<T> list,int r)`
+### 13. `Itertools.permutations(List<T> list,int r)`
 Return successive r length permutations of elements in the iterable.
 Permutations are emitted in lexicographic sort order. So, if the input iterable is sorted, the permutation tuples will be produced in sorted order.
 
