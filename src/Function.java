@@ -1,4 +1,6 @@
+import java.util.List;
+
 @FunctionalInterface
 public interface Function<T,U> {
-    U apply(T... t);
+    U apply( List<T>  list);
 }

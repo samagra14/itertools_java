@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,14 +35,14 @@ public class Itertools {
             int count = -1;
             @Override
             public boolean hasNext() {
+                count++;
                 return true;
             }
 
             @Override
             public T next() {
-                count++;
                 count = count%list.size();
-                return list.get(0);
+                return list.get(count);
             }
         };
     }
@@ -257,11 +258,94 @@ public class Itertools {
 
             @Override
             public U next() {
-                T[] arr = (T[])new Object[lists.length];
+                List<T> list = new ArrayList<>();
                 for (int i = 0; i < lists.length; i++) {
-                    arr[i] = lists[i].get(index);
+                    list.add(lists[i].get(index));
                 }
-                return function.apply(arr);
+                return function.apply(list);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> takeWhile(Predicate<T> pred,List<T> seq){
+        return () -> new Iterator<T>() {
+            boolean next = false;
+            int index = -1;
+            @Override
+            public boolean hasNext() {
+                index++;
+                while (!next&&index<seq.size()&&!pred.pred(seq.get(index))) {
+                    index++;
+                }
+                next = true;
+                return index<seq.size();
+            }
+
+            @Override
+            public T next() {
+                return seq.get(index);
+            }
+        };
+    }
+
+    public static <T> Iterable<List<T>> izip(List<T> ... lists){
+        int smallest = lists[0].size();
+        for (List<T> list :
+                lists) {
+            if (list.size() < smallest)
+                smallest= list.size();
+        }
+        int finalSmallest = smallest;
+        return () -> new Iterator<List<T>>() {
+            int index = -1;
+
+            @Override
+            public boolean hasNext() {
+                index ++;
+                return index < finalSmallest;
+            }
+
+            @Override
+            public List<T> next() {
+                List<T> temp = new ArrayList<>();
+                for (List<T> list :
+                        lists) {
+                    temp.add(list.get(index));
+                }
+                return temp;
+            }
+        };
+    }
+
+
+    public static <T> Iterable<List<T>> izipLongest(T fillValue,List<T> ... lists){
+        int largest = lists[0].size();
+        for (List<T> list :
+                lists) {
+            if (list.size() > largest)
+                largest= list.size();
+        }
+        int finalLargest = largest;
+        return () -> new Iterator<List<T>>() {
+            int index = -1;
+
+            @Override
+            public boolean hasNext() {
+                index ++;
+                return index < finalLargest;
+            }
+
+            @Override
+            public List<T> next() {
+                List<T> temp = new ArrayList<>();
+                for (List<T> list :
+                        lists) {
+                    if (index<list.size())
+                        temp.add(list.get(index));
+                    else
+                        temp.add(fillValue);
+                }
+                return temp;
             }
         };
     }
