@@ -421,4 +421,53 @@ public class Itertools {
             }
         };
     }
+
+    public static <T> Iterable<List<T>> permutations(List<T> list,int r){
+        long rfact = (long) PermutationGenerator.factorial(r);
+        long total = (long) CombinationGenerator.nCr(list.size(),r)*rfact;
+        return new Iterable<List<T>>() {
+            @Override
+            public Iterator<List<T>> iterator() {
+                return new Iterator<List<T>>() {
+                    int index = -1;
+                    int permNo = 0;
+                    int[] currPermutation = new int[r];
+                    int[] currCombination = new int[r];
+                    @Override
+                    public boolean hasNext() {
+                        index ++;
+                        return index < total;
+                    }
+
+                    @Override
+                    public List<T> next() {
+                        if (index ==0){
+                            permNo = 0;
+                            for (int i = 0; i < currCombination.length; i++) {
+                                currCombination[i] = i+1;
+                                currPermutation[i] = i+1;
+                            }
+
+                        }
+                        else if (((permNo+1)%rfact)==0){
+                            permNo++;
+                            currCombination = CombinationGenerator.generateNextCombination(currCombination,list.size(),r);
+                            for (int i = 0; i < currCombination.length; i++) {
+                                currPermutation[i] = i+1;
+                            }
+                        }
+                        else {
+                            permNo++;
+                            currPermutation = PermutationGenerator.generateNextPermutation(currPermutation,r);
+                        }
+                        List<T> result = new ArrayList<>();
+                        for (int i = 0; i < r; i++) {
+                            result.add(list.get(currCombination[currPermutation[i]-1]-1));
+                        }
+                        return result;
+                    }
+                };
+            }
+        };
+    }
 }

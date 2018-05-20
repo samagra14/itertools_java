@@ -269,4 +269,19 @@ public class ItertoolsTest {
         }
     }
 
+    @Test
+    public void testPermutations(){
+        String[] str1 = {"alpha","Beta","gamma","a","b","Samagra"};
+        int i = 0;
+        for (List<String> products :
+                Itertools.permutations(Arrays.asList(str1),5)) {
+            for (String s :
+                    products) {
+                System.out.print(s+" ");
+            }
+            i++;
+            System.out.println(i);
+        }
+    }
+
 }

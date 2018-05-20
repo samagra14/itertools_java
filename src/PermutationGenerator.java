@@ -92,5 +92,29 @@ public class PermutationGenerator {
         return curr;
     }
 
+    public static int[] generateNextPermutation(int[] temp, int n){
+            int m = n-1;
+            while(temp[m-1]>temp[m])
+                m--;
+            int k=n;
+            while(temp[m-1]>temp[k-1])
+                k--;
+            int swapVar;
+            //swap m and k
+            swapVar = temp[m-1];
+            temp[m-1] = temp[k-1];
+            temp[k-1] = swapVar;
+
+            int p = m+1;
+            int q = n;
+            while(p<q){
+                swapVar = temp[p-1];
+                temp[p-1] = temp[q-1];
+                temp[q-1] = swapVar;
+                p++;
+                q--;
+            }
+            return temp;
+    }
 
 }
