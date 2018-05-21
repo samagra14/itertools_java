@@ -244,9 +244,9 @@ public class ItertoolsTest {
                 Itertools.product(Arrays.asList(str1), Arrays.asList(str2), Arrays.asList(str3))) {
             for (String s :
                     products) {
-                System.out.print(s + " ");
+               // System.out.print(s + " ");
             }
-            System.out.println();
+            //System.out.println();
         }
     }
 
@@ -258,10 +258,10 @@ public class ItertoolsTest {
                 Itertools.combinations(Arrays.asList(str1), 4)) {
             for (String s :
                     products) {
-                System.out.print(s + " ");
+               // System.out.print(s + " ");
             }
-            i++;
-            System.out.println(i);
+            //i++;
+            //System.out.println(i);
         }
     }
 
@@ -273,10 +273,10 @@ public class ItertoolsTest {
                 Itertools.permutations(Arrays.asList(str1), 5)) {
             for (String s :
                     products) {
-                System.out.print(s + " ");
+                //System.out.print(s + " ");
             }
             i++;
-            System.out.println(i);
+            //System.out.println(i);
         }
     }
 
