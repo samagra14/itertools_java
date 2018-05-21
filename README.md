@@ -5,9 +5,9 @@
 	<a href="https://travis-ci.org/samagra14/itertools_java/builds/">
     <img src="https://travis-ci.org/samagra14/itertools_java.svg?branch=master" />
   </a>
-  
-[![GitHub issues](https://img.shields.io/github/issues/samagra14/itertools_java.svg)](https://github.com/samagra14/itertools_java/issues)
-
+<a href="https://github.com/samagra14/itertools_java/issues">
+<img src="https://img.shields.io/github/issues/samagra14/itertools_java.svg"
+      alt="API" /></a>
 <a href="https://android-arsenal.com/api?level=15">
 <img src="https://img.shields.io/badge/API-15%2B-blue.svg?style=flat-square"
       alt="API" />
