@@ -1,4 +1,4 @@
-# <div align="center">Itertools-java</div>
+# <div align="center">Itertools for java</div>
   <div align="center">A library for efficiently generating and iterating over various combinatorial constructs in java.</div><br>
  
 <div align="center">
@@ -51,13 +51,17 @@ The aim of this library is to provide an interface
      + [ product(List<T> ... lists)](#10--itertoolsproduct-list-t---lists--)
      + [ combinations(List<T> list, int r)](#11--itertoolscombinations-list-t--list--int-r--)
      + [ permutations(List<T> list,int r)](#12--itertoolspermutations-list-t--list-int-r--)
+ - [Contributing](#contributing)
+ - [License](#license)
  - [References](#references)
 
 
  
  # Features                                
-**This library uses generator like constructs to provide iterators and hence
-has no memory and speed limitations as a particular element is generated only when it is needed.**
+* This library uses generator like constructs to provide iterators and hence
+has no memory or speed limitations.
+* A particular element is generated only when it is needed.
+* As a result permutations of large arrays can be easily evaluated.
 
 The following methods have been implemented in the library and are ready for use.
 # Documentation
@@ -359,7 +363,11 @@ public void testPermutations(){
 
 ````
 
+# Contributing
+Feel free to send any PRs right away.
 
+#License
+Check out [LICENSE.md](https://github.com/samagra14/itertools_java/blob/master/LICENSE.md)
 # References
 1. Wikipedia page for [Generators](https://en.wikipedia.org/wiki/Generator_(computer_programming))
 2. This project is heavily inspired from [Python itertools](https://docs.python.org/2/library/itertools.html)
