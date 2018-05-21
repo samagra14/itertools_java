@@ -1,4 +1,20 @@
-# Itertools for java
+# <div align="center">Long-Shadows</div>
+  <div align="center">A library for efficiently generating and iterating over various combinatorial constructs in java.</div><br>
+ 
+<div align="center">
+	<a href="https://travis-ci.org/samagra14/itertools_java/builds/">
+    <img src="https://travis-ci.org/samagra14/itertools_java.svg?branch=master" />
+  </a>
+	<a href="https://android-arsenal.com/api?level=15">
+    <img src="https://img.shields.io/badge/API-15%2B-blue.svg?style=flat-square"
+      alt="API" />
+  </a>
+	<a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-red.svg?style=flat-square"
+      alt="License: MIT" />
+  </a>
+</div><br>
+
 The aim of this library is to provide an interface
  similar to `itertools` in python.This module implements
  a number of iterator building blocks inspired by
