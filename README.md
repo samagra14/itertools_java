@@ -1,4 +1,4 @@
-# <div align="center">Long-Shadows</div>
+# <div align="center">Itertools-java</div>
   <div align="center">A library for efficiently generating and iterating over various combinatorial constructs in java.</div><br>
  
 <div align="center">
