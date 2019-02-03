@@ -192,31 +192,41 @@ public class Itertools {
         };
     }
 
-    /**
+      /**
      * @param predicate
      * @param list
-     * @param <T>
+     * @param           <T>
      * @return
      */
-    public static <T> Iterable<T> ifilter(Predicate<T> predicate, List<T> list) {
+    public static <T> Iterable<T> ifilter(Predicate<T> predicate, Iterable<T> list) {
+        Iterator<T> iterator = list.iterator();
         return () -> new Iterator<T>() {
-            int index = -1;
-
+            T obj;
+            boolean nex;
             @Override
             public boolean hasNext() {
-                index++;
-                while (index < list.size() && !predicate.pred(list.get(index)))
-                    index++;
-                return index < list.size();
+                nex=iterator.hasNext();
+                if(nex)
+                obj = iterator.next();
+                if (!predicate.pred(obj)) {
+                    for (int i = 0; ; i++) {
+                        nex=iterator.hasNext();
+                        if(!nex)
+                            return false;
+                        obj=iterator.next();
+                        if (predicate.pred(obj))
+                        return nex;
+                    }
+                }
+                return nex;
             }
 
             @Override
             public T next() {
-                return list.get(index);
+                return obj;
             }
         };
     }
-
 
     public static <T> Iterable<T> ifilterfalse(Predicate<T> predicate, List<T> list) {
         return () -> new Iterator<T>() {
