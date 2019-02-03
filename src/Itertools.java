@@ -31,8 +31,14 @@ public class Itertools {
         return count(start, 1);
     }
 
-    public static <T> Iterable<T> cycle(List<T> list) {
+    public static <T> Iterable<T> cycle(Iterable<T> iterable) {
         return () -> new Iterator<T>() {
+
+		Iterator<T> iterator = iterable.iterator();
+
+			List<T> list = new ArrayList<>();
+			iterator.forEachRemaining(list::add);
+
             int count = -1;
 
             @Override
@@ -96,10 +102,16 @@ public class Itertools {
      * @param <T>
      * @return
      */
-    public static <T> Iterable<T> chain(List<T>... iterables) {
+    public static <T> Iterable<T> chain(Iterable<T>... iterables) {
+
+		Iterator<T> iterator = iterables.iterator();
+
+		List<T> list1 = new ArrayList<>();
+		iterator.forEachRemaining(list1::add);
+
         int size = 0;
         for (List<T> list :
-                iterables) {
+                list1) {
             size += list.size();
         }
         int finalSize = size;
@@ -117,12 +129,12 @@ public class Itertools {
             @Override
             public T next() {
                 int presentIterableIndex = counter - sizeTillNow;
-                while (presentIterableIndex >= iterables[iterableNo].size()) {
-                    sizeTillNow += iterables[iterableNo].size();
+                while (presentIterableIndex >= list1[iterableNo].size()) {
+                    sizeTillNow += list1[iterableNo].size();
                     presentIterableIndex = counter - sizeTillNow;
                     iterableNo++;
                 }
-                return iterables[iterableNo].get(presentIterableIndex);
+                return list1[iterableNo].get(presentIterableIndex);
             }
         };
     }
@@ -133,21 +145,31 @@ public class Itertools {
      * @param <T>
      * @return
      */
-    public static <T> Iterable<T> compress(List<T> data, List<Boolean> selectors) {
+    public static <T> Iterable<T> compress(Iterable<T> data, Iterable<Boolean> selectors) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator1 = data.iterator();
+            Iterator<T> iterator2 = selectors.iterator();
+            
+            List<T> data1 = new ArrayList<>();
+            iterator1.forEachRemaining(data1::add);
+            
+            List<T> selectors1 = new ArrayList<>();
+            iterator2.forEachRemaining(selectors1::add);
+            
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (index < data.size() && !selectors.get(index))
+                while (index < data1.size() && !selectors1.get(index))
                     index++;
-                return index < data.size();
+                return index < data1.size();
             }
 
             @Override
             public T next() {
-                return data.get(index);
+                return data1.get(index);
             }
         };
     }
@@ -158,24 +180,30 @@ public class Itertools {
      * @param <T>
      * @return
      */
-    public static <T> Iterable<T> dropWhile(Predicate<T> pred, List<T> seq) {
+    public static <T> Iterable<T> dropWhile(Predicate<T> pred, Iterable<T> seq) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator = seq.iterator();
+            
+            List<T> list = new ArrayList<>();
+            iterator.forEachRemaining(list::add);
+            
             boolean next = false;
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (!next && index < seq.size() && pred.pred(seq.get(index))) {
+                while (!next && index < list.size() && pred.pred(list.get(index))) {
                     index++;
                 }
                 next = true;
-                return index < seq.size();
+                return index < list.size();
             }
 
             @Override
             public T next() {
-                return seq.get(index);
+                return list.get(index);
             }
         };
     }
@@ -186,67 +214,85 @@ public class Itertools {
      * @param <T>
      * @return
      */
-    public static <T> Iterable<T> ifilter(Predicate<T> predicate, List<T> list) {
+    public static <T> Iterable<T> ifilter(Predicate<T> predicate, Iterable<T> list) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator = list.iterator();
+            
+            List<T> list1 = new ArrayList<>();
+            iterator.forEachRemaining(list1::add);
+            
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (index < list.size() && !predicate.pred(list.get(index)))
+                while (index < list1.size() && !predicate.pred(list1.get(index)))
                     index++;
-                return index < list.size();
+                return index < list1.size();
             }
 
             @Override
             public T next() {
-                return list.get(index);
+                return list1.get(index);
             }
         };
     }
 
 
-    public static <T> Iterable<T> ifilterfalse(Predicate<T> predicate, List<T> list) {
+    public static <T> Iterable<T> ifilterfalse(Predicate<T> predicate, Iterable<T> list) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator = list.iterator();
+            
+            List<T> list1 = new ArrayList<>();
+            iterator.forEachRemaining(list1::add);
+            
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (index < list.size() && predicate.pred(list.get(index)))
+                while (index < list1.size() && predicate.pred(list1.get(index)))
                     index++;
-                return index < list.size();
+                return index < list1.size();
             }
 
             @Override
             public T next() {
-                return list.get(index);
+                return list1.get(index);
             }
         };
     }
 
-    public static <T> Iterable<T> islice(List<T> seq, int start, int stop, int step) {
+    public static <T> Iterable<T> islice(Iterable<T> seq, int start, int stop, int step) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator = seq.iterator();
+            
+            List<T> list = new ArrayList<>();
+            iterator.forEachRemaining(list::add);
+            
             int index = start - step;
 
             @Override
             public boolean hasNext() {
                 index += step;
-                return index < seq.size() && index < stop && index >= start;
+                return index < list.size() && index < stop && index >= start;
             }
 
             @Override
             public T next() {
-                return seq.get(index);
+                return list.get(index);
             }
         };
     }
 
-    public static <T> Iterable<T> islice(List<T> seq, int stop, int step) {
+    public static <T> Iterable<T> islice(Iterable<T> seq, int stop, int step) {
         return islice(seq, 0, stop, step);
     }
 
-    public static <T> Iterable<T> islice(List<T> seq, int stop) {
+    public static <T> Iterable<T> islice(Iterable<T> seq, int stop) {
         return islice(seq, 0, stop, 1);
     }
 
@@ -272,24 +318,30 @@ public class Itertools {
         };
     }
 
-    public static <T> Iterable<T> takeWhile(Predicate<T> pred, List<T> seq) {
+    public static <T> Iterable<T> takeWhile(Predicate<T> pred, Iterable<T> seq) {
         return () -> new Iterator<T>() {
+            
+            Iterator<T> iterator = seq.iterator();
+            
+            List<T> list = new ArrayList<>();
+            iterator.forEachRemaining(list::add);
+            
             boolean next = false;
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (!next && index < seq.size() && !pred.pred(seq.get(index))) {
+                while (!next && index < seq.size() && !pred.pred(list.get(index))) {
                     index++;
                 }
                 next = true;
-                return index < seq.size();
+                return index < list.size();
             }
 
             @Override
             public T next() {
-                return seq.get(index);
+                return list.get(index);
             }
         };
     }
