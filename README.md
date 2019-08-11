@@ -36,7 +36,7 @@ The aim of this library is to provide an interface
    * [Infinite Iterators](#infinite-iterators)
    * [Iterators terminating on the shortest input sequence:](#iterators-terminating-on-the-shortest-input-sequence)
    * [Combinatoric generators](#combinatoric-generators)
- - [How to use ?](#how-to-use--)
+ - [How to use ?](#how-to-use-)
    * [Itertool functions and their usage examples](#itertool-functions-and-their-usage-examples)
      + [ chain(List<T>... iterables)](#1-itertoolschainlistt-iterables)
      + [ compress(List<T> data, List<Boolean> selectors)](#2-itertoolscompresslistt-data-listboolean-selectors)
