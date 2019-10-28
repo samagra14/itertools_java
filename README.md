@@ -366,7 +366,7 @@ public void testPermutations(){
 # Contributing
 Feel free to send any PRs right away.
 
-#License
+# License
 Check out [LICENSE.md](https://github.com/samagra14/itertools_java/blob/master/LICENSE.md)
 # References
 1. Wikipedia page for [Generators](https://en.wikipedia.org/wiki/Generator_(computer_programming))
