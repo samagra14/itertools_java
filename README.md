@@ -1,5 +1,5 @@
 # <div align="center">Itertools for java</div>
-  <div align="center">A library for efficiently generating and iterating over various combinatorial constructs in java.</div><br>
+  <div align="center">A library for efficiently generating and iterating over various combinatorial constructs in java.</div><br> something
  
 <div align="center">
 	<a href="https://travis-ci.org/samagra14/itertools_java/builds/">
