@@ -31,24 +31,26 @@ public class Itertools {
         return count(start, 1);
     }
 
-    public static <T> Iterable<T> cycle(List<T> list) {
+       public static <T> Iterable<T> cycle(Iterable<T> list) {
         return () -> new Iterator<T>() {
-            int count = -1;
+            Iterator<T> iterator = list.iterator();
 
             @Override
             public boolean hasNext() {
-                count++;
                 return true;
             }
 
             @Override
             public T next() {
-                count = count % list.size();
-                return list.get(count);
+                try {
+                    return (T) iterator.next();
+                } catch (Exception e) {
+                    iterator = list.iterator();
+                    return (T) iterator.next();
+                }
             }
         };
     }
-
     /**
      * @param t
      * @param n
@@ -91,120 +93,140 @@ public class Itertools {
         };
     }
 
+    
     /**
      * @param iterables
-     * @param <T>
+     * @param           <T>
      * @return
      */
-    public static <T> Iterable<T> chain(List<T>... iterables) {
-        int size = 0;
-        for (List<T> list :
-                iterables) {
-            size += list.size();
-        }
-        int finalSize = size;
+    public static <T> Iterable<T> chain(Iterable<T>... iterables) {
+        int no_of_iterables = iterables.length;
         return () -> new Iterator<T>() {
-            int counter = -1;
             int iterableNo = 0;
-            int sizeTillNow = 0;
+            Iterator<T> iterator = iterables[iterableNo].iterator();
 
             @Override
             public boolean hasNext() {
-                counter++;
-                return counter < finalSize;
+                if (iterableNo == no_of_iterables - 1) {
+                    return iterator.hasNext();
+                }
+                return true;
             }
 
             @Override
             public T next() {
-                int presentIterableIndex = counter - sizeTillNow;
-                while (presentIterableIndex >= iterables[iterableNo].size()) {
-                    sizeTillNow += iterables[iterableNo].size();
-                    presentIterableIndex = counter - sizeTillNow;
-                    iterableNo++;
+                if (iterator.hasNext()) {
+                    return (T) iterator.next();
+                } else {
+                    while (!iterator.hasNext()) {
+                        iterableNo++;
+                        iterator = iterables[iterableNo].iterator();
+                    }
+                    return (T) iterator.next();
                 }
-                return iterables[iterableNo].get(presentIterableIndex);
             }
         };
     }
-
-    /**
+    
+       /**
      * @param data
      * @param selectors
-     * @param <T>
+     * @param           <T>
      * @return
      */
-    public static <T> Iterable<T> compress(List<T> data, List<Boolean> selectors) {
+    public static <T> Iterable<T> compress(Iterable<T> data, List<Boolean> selectors) {
+        Iterator<T> iterator = data.iterator();
         return () -> new Iterator<T>() {
             int index = -1;
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (index < data.size() && !selectors.get(index))
+                while (index < selectors.size() && !selectors.get(index)) {
                     index++;
-                return index < data.size();
+                    iterator.next();
+                }
+                return index < selectors.size();
             }
 
             @Override
             public T next() {
-                return data.get(index);
+                return iterator.next();
             }
         };
     }
 
-    /**
+      /**
      * @param pred
      * @param seq
-     * @param <T>
+     * @param      <T>
      * @return
      */
-    public static <T> Iterable<T> dropWhile(Predicate<T> pred, List<T> seq) {
+    public static <T> Iterable<T> dropWhile(Predicate<T> pred, Iterable<T> seq) {
+        Iterator<T> iterator = seq.iterator();
         return () -> new Iterator<T>() {
             boolean next = false;
             int index = -1;
+            boolean firstElement = true;
+            T obj = iterator.next();
 
             @Override
             public boolean hasNext() {
                 index++;
-                while (!next && index < seq.size() && pred.pred(seq.get(index))) {
+                while (!next && pred.pred(obj)) {
+                    obj = iterator.next();
                     index++;
                 }
                 next = true;
-                return index < seq.size();
+                return iterator.hasNext();
             }
 
             @Override
             public T next() {
-                return seq.get(index);
+                if (firstElement) {
+                    firstElement = false;
+                    return obj;
+                }
+                return iterator.next();
             }
         };
     }
 
-    /**
+      /**
      * @param predicate
      * @param list
-     * @param <T>
+     * @param           <T>
      * @return
      */
-    public static <T> Iterable<T> ifilter(Predicate<T> predicate, List<T> list) {
+    public static <T> Iterable<T> ifilter(Predicate<T> predicate, Iterable<T> list) {
+        Iterator<T> iterator = list.iterator();
         return () -> new Iterator<T>() {
-            int index = -1;
-
+            T obj;
+            boolean nex;
             @Override
             public boolean hasNext() {
-                index++;
-                while (index < list.size() && !predicate.pred(list.get(index)))
-                    index++;
-                return index < list.size();
+                nex=iterator.hasNext();
+                if(nex)
+                obj = iterator.next();
+                if (!predicate.pred(obj)) {
+                    for (int i = 0; ; i++) {
+                        nex=iterator.hasNext();
+                        if(!nex)
+                            return false;
+                        obj=iterator.next();
+                        if (predicate.pred(obj))
+                        return nex;
+                    }
+                }
+                return nex;
             }
 
             @Override
             public T next() {
-                return list.get(index);
+                return obj;
             }
         };
     }
-
 
     public static <T> Iterable<T> ifilterfalse(Predicate<T> predicate, List<T> list) {
         return () -> new Iterator<T>() {
@@ -272,24 +294,27 @@ public class Itertools {
         };
     }
 
-    public static <T> Iterable<T> takeWhile(Predicate<T> pred, List<T> seq) {
+        public static <T> Iterable<T> takeWhile(Predicate<T> pred, Iterable<T> seq) {
+        Iterator<T> iterator = seq.iterator();
         return () -> new Iterator<T>() {
-            boolean next = false;
-            int index = -1;
+            T obj = iterator.next();
+            boolean firstElement = true;
 
             @Override
             public boolean hasNext() {
-                index++;
-                while (!next && index < seq.size() && !pred.pred(seq.get(index))) {
-                    index++;
+                if (pred.pred(obj)) {
+                    if (firstElement)
+                        firstElement = false;
+                    else
+                        obj = iterator.next();
+                    return iterator.hasNext() && pred.pred(obj);
                 }
-                next = true;
-                return index < seq.size();
+                return false;
             }
 
             @Override
             public T next() {
-                return seq.get(index);
+                return obj;
             }
         };
     }
